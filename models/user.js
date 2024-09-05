@@ -8,7 +8,6 @@ const UserSchema = new schema(
     username: {
       type: String,
       required: true,
-      unique: true,
       max: 255,
     },
     email: {
@@ -26,11 +25,9 @@ const UserSchema = new schema(
     avatar: String,
     address: {
       type: String,
-      required: true,
     },
     phone: {
       type: String,
-      required: true,
       match: [
         PHONE_REGEX,
         "Please fill a valid phone number with exactly 10 digits",
