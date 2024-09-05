@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import cloudinary from "../configs/cloudinary.js";
 
 const hashPassword = async (password) => {
   const salt = await bcrypt.genSalt();
@@ -11,4 +12,13 @@ const comparePassword = async (password, receivePassword) => {
   return isMatch;
 };
 
-export { hashPassword, comparePassword };
+const cloudinaryUpload = async (img) => {
+  if (!img) return "";
+  const imgUploaded = await cloudinary.uploader.upload(img.path, {
+    resource_type: "auto",
+  });
+  const imgUrl = imgUploaded.secure_url;
+  return imgUrl;
+};
+
+export { hashPassword, comparePassword, cloudinaryUpload };
